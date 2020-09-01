@@ -1,0 +1,17 @@
+SRR072893.1692271	0	2L	7583	60	40M	*	0	0	AGAGAACCCACGTTTGAACAAGTATCGGCGTGTGGACAAC	<9799:>A>?:?:?>A?>><1;297-00+/C@@C8/>@49	AS:i:0	XN:i:0	XM:i:0	XO:i:0	XG:i:0	NM:i:0	MD:Z:40	YT:Z:UU	NH:i:1
+
+Number of alignments  2000000
+Number of perfect alignments  1702765
+First 10 alignments 
+2L
+2L
+2L
+2L
+2L
+2L
+2L
+2L
+2L
+2L
+Average MapQ score across all reads  59.6407825
+Number of reads of Chromosome 2L between 10000 and 20000  7550
