@@ -1,7 +1,21 @@
-BDGP6.Ensembl.81.gtf
-K27me3.bed
-K4me3.bed
-K9me3.bed
-SRR072893.bam
-SRR072893.bam.bai
-directory.txt
+total 1590232
+-rw-r--r--  1 cmdb  staff      14047  2 Sep 18:11 2L.txt
+-rw-r--r--  1 cmdb  staff      14047  2 Sep 18:13 2Lsort.txt
+-rw-r--r--  1 cmdb  staff  182276780  2 Sep 16:44 BDGP6.Ensembl.81.gtf
+-rw-r--r--  1 cmdb  staff         65  2 Sep 18:03 K27.info
+-rw-r--r--  1 cmdb  staff       8602  2 Sep 16:32 K27me3.bed
+-rw-r--r--  1 cmdb  staff      75948  2 Sep 16:35 K4me3.bed
+-rw-r--r--  1 cmdb  staff         78  2 Sep 18:03 K9.info
+-rw-r--r--  1 cmdb  staff       5846  2 Sep 18:02 K9me3.bed
+-rw-r--r--  1 cmdb  staff  616564462 31 Aug 16:02 SRR072893.bam
+-rw-r--r--  1 cmdb  staff     239600  2 Sep 17:23 SRR072893.bam.bai
+-rw-r--r--  1 cmdb  staff    3055280  2 Sep 17:39 col3.txt
+-rw-r--r--  1 cmdb  staff          0  2 Sep 18:27 directory.txt
+-rw-r--r--  1 cmdb  staff         67  2 Sep 17:53 features.txt
+-rw-r--r--  1 cmdb  staff        150  2 Sep 18:22 first10.txt
+-rw-r--r--  1 cmdb  staff      29946  2 Sep 17:26 igv_snapshot.png
+-rw-r--r--  1 cmdb  staff         78  2 Sep 17:59 k4.info
+-rw-r--r--  1 cmdb  staff    3055135  2 Sep 17:51 nohead.txt
+-rw-r--r--  1 cmdb  staff    3055135  2 Sep 17:52 sort.txt
+-rw-r--r--  1 cmdb  staff      75948  2 Sep 18:07 sort4.txt
+-rw-r--r--  1 cmdb  staff      14047  2 Sep 18:21 sorted2L.txt
