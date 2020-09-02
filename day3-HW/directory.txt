@@ -1,0 +1,7 @@
+BDGP6.Ensembl.81.gtf
+K27me3.bed
+K4me3.bed
+K9me3.bed
+SRR072893.bam
+SRR072893.bam.bai
+directory.txt
