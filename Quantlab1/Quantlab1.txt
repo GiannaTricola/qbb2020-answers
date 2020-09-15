@@ -1,0 +1,123 @@
+Question 1:
+1a:
+samtools faidx Desktop/asm/ref.fa
+cat asm/ref.fa.fai 
+
+genome size: 233806
+
+1b.
+fastqc ~/Desktop/asm/frag180.1.fq
+less -S ~/Desktop/asm/frag180.1.fq/fastqc_data.txt
+
+frag180.1.fq seqs: 35178
+	
+fastqc ~/Desktop/asm/frag180.2.fq
+less -S ~/Desktop/asm/frag180.2.fq/fastqc_data.txt
+
+frag180.2.fq seqs: 35178
+	
+fastqc ~/Desktop/asm/jump2k.1.fq
+less -S ~/Desktop/asm/jump2k.1.fq/fastqc_data.txt	
+
+jump2k.1.fq seqs: 70355
+	
+fastqc ~/Desktop/asm/jump2k.1.fq	
+less -S ~/Desktop/asm/jump2k.2.fq/fastqc_data.txt
+
+jump2k.2.fq sequences: 70355
+	
+1c.
+   frag: 30X coverage
+   jump: 30X coverage
+   since they both contribute 30x coverage then total would be 60X
+   
+1d: screenshots
+
+2a:
+jellyfish count -m 21 -C -s 1000000 /Users/cmdb/Desktop/asm/*.fq
+jellyfish histo mer_counts.jf > reads.histo
+cat reads.histo
+
+1091
+
+2b:
+
+jellyfish dump -c -t mer_counts.jf | sort -r -g -k 2 | head -n 10 > dumpall.txt
+
+GCCCACTAATTAGTGGGCGCC	105
+CGCCCACTAATTAGTGGGCGC	104
+CCCACTAATTAGTGGGCGCCG	104
+ACGGCGCCCACTAATTAGTGG	101
+CAGGCCAGCTTATAAGCTGGC	98
+AACAGGCCAGCTTATAAGCTG	98
+ACAGGCCAGCTTATAAGCTGG	97
+AGGCCAGCTTATAAGCTGGCC	95
+AGCATCGCCCACATGTGGGCG	83
+GCATCGCCCACATGTGGGCGA	82
+
+2c: Genome Haploid Length         min: 233,464 bp
+
+2d:GenomeScope slightly underestimated the genome size compared to the reference genome.
+
+3a: 
+grep -c '>' contigs.fasta
+
+4 contigs 
+
+3b: samtools faidx contigs.fasta
+	cat contigs.fasta.fai
+NODE_1_length_105831_cov_20.671371	105831
+NODE_2_length_47861_cov_20.231319	47861
+NODE_3_length_41352_cov_20.588756	41352	
+NODE_4_length_39423_cov_20.384723	39423
+
+3C: Longest contig: 105831
+
+3D: 
+NODE_1_length_105831_cov_20.671371	105831	36	60	61
+NODE_2_length_47861_cov_20.231319	47861	107666	60	61
+NODE_3_length_41352_cov_20.588756	41352	156360	60	61
+NODE_4_length_39423_cov_20.384723	39423	198437	60	61
+
+Half of the genome size would be roughly 116K bp which would fall into contig NODE 2
+N50 = Node 2
+
+4a. 
+dnadiff /Users/cmdb/Desktop/asm/ref.fa /Users/cmdb/Desktop/asm/asm/contigs.fasta
+cat out.report
+Average identity = 100
+
+nucmer /Users/cmdb/Desktop/asm/ref.fa /Users/cmdb/Desktop/asm/asm/contigs.fasta
+show-coords out.delta
+
+4b:105831
+
+cat out.qdiff 
+
+4c: 1 insertion
+
+5a: cat out.qdiff
+Insertion site : 13,584
+
+5b: cat out.qdiff
+Insertion length: 712 bp
+
+samtools faidx ~/Desktop/asm/asm/contigs.fasta NODE_3_length_41352_cov_20_588756:13854-14565 > sub.txt
+
+5C:>NODE_3_length_41352_cov_20.588756:13854-14565
+TAACGATTTACATCGGGAAAGCTTAATGCAATTCACGCAGATATTCAGCTTAGAAGGTAC
+GCAGCGGTGACGGGGTGCGGTCCATAATCTATGAAGCTATGAATTCGTACCTCAAGTAAT
+GTTTTCTTCGCTGCAGTTCAGAAGTGATAAAGGTATCCCGCTTAGCCTGGCATACTTTGT
+GCGTTCGTACCGCCCAGCATTAATGACTTGTGTAGGCAAGTAATGAACGACTCTTCTACG
+CCGCGCCTAACCTCCGCACATAATGGCAGCATGTGGTAGTTACATACGCACAGAAGTGGT
+TCGGTTTTAACTATAGTCAGATATGAATAAGCTGCGTGTGTCGTTGTGTCGGCGTGTCGT
+ACTTACCTCCTGACATAGGTGAATTTCAGCCTACTGTAAGTTTGGAGTCGCGCTCTTTTC
+TTATTATATTCTTTGGTATGTGTGTGATGGGTTCGGGCGTGTATTGATGTCTCTAAGGCT
+CATGTTAGTGTTTATTTGGTCAGTTATGACGGTGTTCCTGTCGTACGTGTTGGCTTAGCG
+GACTTGTAGACGGGATCAAGGTTGTCTGACCCTCCGGTCGACCGTGGGTCGGCCGTCCCG
+GCCAGAATACAAGCCGCTTAGACTTTCGAAAGAGGGTAAGTTACTACGCGCGAACGTTAT
+ACCTCGTTTCAGTATGCACTCCCTTAAGTCACTCAGAAAAGACTAAGGGGCT
+ 
+5d: python ported_decoder.py --decode --input sub.txt --rev_comp
+
+Congratulations to the 2020 CMDB @ JHU class! Keep on looking for little green aliens...
