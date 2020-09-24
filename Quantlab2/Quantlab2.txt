@@ -1,0 +1,25 @@
+Step 1: Index the SacCer3 genome 
+
+bwa index -p SacCer3 -a is SacCer3.fa
+
+Step 2: Alignment with bwa mem
+Script script 
+
+Step 3: Create a sorted bam file with samtools, for input to variant calle
+Script sort 
+
+Step 4:Variant calling with freebayes
+freebayes -f sacCer3.fa -p 1 --genotype-qualities *.bam >> var.vcf
+
+Step 5: Filter variants based on genotype quality using vcffilter
+
+vcffilter -f "QUAL > 20" var.vcf > filt.vcf
+
+Step 6: Decompose complex haplotypes using vcfallelicprimitives
+
+vcfallelicprimitives -k -g filt.vcf > prim.vcf
+
+Step 7: Variant effect prediction with snpeff ann
+snpeff ann R64-1-1.86 prim.vcf > eff.vcf
+
+Step 8: Exploratory data analysis through plotting
