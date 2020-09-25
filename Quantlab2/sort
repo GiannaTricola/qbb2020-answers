@@ -1,0 +1,5 @@
+#!/bin/bash
+
+for SAMPLE in A01_09.sam A01_11.sam A01_23.sam A01_24.sam A01_27.sam A01_31.sam A01_35.sam A01_39.sam A01_62.sam A01_63.sam
+do samtools sort -o ${SAMPLE}.bam ${SAMPLE}
+done
