@@ -1,3 +1,4 @@
+Part1
 tar -xvzf gle.tar.xz
 gunzip chr19.fa
 bowtie2-build chr19.fa chr19
@@ -25,24 +26,14 @@ wget https://raw.githubusercontent.com/bxlab/qbb2020/master/week5/Mus_musculus.G
 bedtools intersect -c -a Mus_musculus.GRCm38.94_features.bed -b G1E_summits.bed > G1E_feat.bed
 bedtools intersect -c -a Mus_musculus.GRCm38.94_features.bed -b ER4_summits.bed > ER4_feat.bed
 
-grep -i "promoter" G1E_feat.bed > g_p.txt
-grep -i "exon" G1E_feat.bed > g_e.txt
-grep -i "intron" G1E_feat.bed > g_i.txt
-
-grep -i "promoter" ER4_feat.bed > e_p.txt
-grep -i "exon" ER4_feat.bed > e_e.txt
-grep -i "intron" ER4_feat.bed > e_i.txt
-
-cut -f 7
-paste 
 
 Part 2: 
-sort -k 7 -g -r ER4_peaks.narrowpeak | head -n 100 > sorted_peaks
+sort -k 8 -g ER4_peaks.narrowpeak | head -n 100 > sorted_peaks2
 
-bedtools getfasta -fi ./bowtie_index/chr19.fa -bed sorted_peaks > sorted_peaks.fa
+bedtools getfasta -fi ./bowtie_index/chr19.fa -bed sorted_peaks2 > sorted_peaks2.fa
 
 tar -xvzf motif_databases.12.19.tgz
 
-meme-chip -db motif_databases/JASPAR/JASPAR_CORE_2016.meme sorted_peaks.sfa
+meme-chip -meme-maxw 20 -db motif_databases/JASPAR/JASPAR_CORE_2016.meme sorted_peaks.fa
 
 
