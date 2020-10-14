@@ -1,0 +1,48 @@
+tar -xvzf gle.tar.xz
+gunzip chr19.fa
+bowtie2-build chr19.fa chr19
+mkdir bowtie_index
+mv chr19* ./bowtie_index/
+
+for sample in CTCF_ER4 CTCF_G1E input_ER4 input_G1E
+do
+  bowtie2 -x bowtie_index/chr19 -U ${sample}.fastq -S ${sample}.sam -p 6
+  samtools view -bSo ${sample}.bam ${sample}.sam
+  samtools sort ${sample}.bam -o ${sample}.sorted.bam
+  samtools index ${sample}.sorted.bam
+done
+
+macs2 callpeak -t CTCF_ER4.bam -c input_ER4.bam --format=BAM --name=ER4 --gsize=138000000 --tsize=26
+
+macs2 callpeak -t CTCF_G1E.bam -c input_G1E.bam --format=BAM --name=G1E --gsize=138000000 --tsize=26
+
+bedtools intersect -v -a ER4_summits.bed -b G1E_summits.bed > diff_exp.bed
+
+bedtools intersect -v -a G1E_summits.bed -b ER4_summits.bed > diff_exp2.bed
+
+wget https://raw.githubusercontent.com/bxlab/qbb2020/master/week5/Mus_musculus.GRCm38.94_features.bed
+
+bedtools intersect -c -a Mus_musculus.GRCm38.94_features.bed -b G1E_summits.bed > G1E_feat.bed
+bedtools intersect -c -a Mus_musculus.GRCm38.94_features.bed -b ER4_summits.bed > ER4_feat.bed
+
+grep -i "promoter" G1E_feat.bed > g_p.txt
+grep -i "exon" G1E_feat.bed > g_e.txt
+grep -i "intron" G1E_feat.bed > g_i.txt
+
+grep -i "promoter" ER4_feat.bed > e_p.txt
+grep -i "exon" ER4_feat.bed > e_e.txt
+grep -i "intron" ER4_feat.bed > e_i.txt
+
+cut -f 7
+paste 
+
+Part 2: 
+sort -k 7 -g -r ER4_peaks.narrowpeak | head -n 100 > sorted_peaks
+
+bedtools getfasta -fi ./bowtie_index/chr19.fa -bed sorted_peaks > sorted_peaks.fa
+
+tar -xvzf motif_databases.12.19.tgz
+
+meme-chip -db motif_databases/JASPAR/JASPAR_CORE_2016.meme sorted_peaks.sfa
+
+
