@@ -1,0 +1,4 @@
+cat week4_query ~/Desktop/seq_dump.txt > query_and_blast.fa
+Translate into aa
+transeq -sequence ./query_and_blast.fa -outseq aminoacid.fa
+mafft aminoacid.fa > alignment.fa
