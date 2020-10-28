@@ -1,0 +1,20 @@
+tar -xvzf methylation_fastq.tar.gz
+fastqc SRR3083926_1.chr6.fastq
+unzip SRR3083926_1.chr6.fastq.zip
+#there is a warning for nucleotide content...this is because all cytosines have been converted to thymine and thus you see a huge reduction (almost none) in cytosines
+gunzip chr6.fa.gz
+
+bismark_genome_preparation ./
+
+mkdir mm10 
+
+mv Bisulfite_Genome chr6.fa ./mm10
+
+bismark --genome  ./mm10  -1 SRR3083926_1.chr6.fastq,SRR3083929_1.chr6.fastq -2 SRR3083926_2.chr6.fastq,SRR3083929_2.chr6.fastq
+
+samtools sort SRR3083926_1.chr6_bismark_bt2_pe.bam -o bismark926.sorted.bam
+
+samtools sort SRR3083929_1.chr6_bismark_bt2_pe.bam -o bismark929.sorted.bam
+
+samtools index bismark926.sorted.bam
+samtools index bismark929.sorted.bam
