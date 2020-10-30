@@ -18,3 +18,11 @@ samtools sort SRR3083929_1.chr6_bismark_bt2_pe.bam -o bismark929.sorted.bam
 
 samtools index bismark926.sorted.bam
 samtools index bismark929.sorted.bam
+
+bismark_methylation_extractor --comprehensive --bedgraph bismark926.sorted.bam
+
+bismark_methylation_extractor --comprehensive --bedgraph bismark929.sorted.bam
+
+gunzip bismark926.sorted.bedGraph.gz
+
+gunzip bismark929.sorted.bedGraph.gz
