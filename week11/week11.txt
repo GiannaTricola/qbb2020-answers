@@ -1,0 +1,5 @@
+tar -xvf 3DGenomeData.tar.gz
+hifive fend -L mm9.len --binned 100000 -g mm9 file.fends
+hifive hic-data -X data/WT_100kb/raw_\*.mat genome/file.fends file.hic
+hifive hic-project -f 25 -n 25 -j 100000 file.hic project.hic
+hifive hic-normalize express -f 25 -w cis project.hic
