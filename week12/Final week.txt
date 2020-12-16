@@ -1,0 +1,88 @@
+tar -xvf week13_data.tar
+KtImportText KRAKEN/SRR4921*.kraken -c -q -o kraken.txt
+
+
+cat evol1.kraken | cut -f 2,3 > bac.kraken.krona
+
+
+Step2:
+bwa index assembly.fasta
+
+bwa mem assembly.fasta READS/SRR492183_1.fastq READS/SRR492183_2.fastq > aln183.sam
+
+bwa mem assembly.fasta READS/SRR492186_1.fastq READS/SRR492186_2.fastq > aln186.sam
+
+bwa mem assembly.fasta READS/SRR492188_1.fastq READS/SRR492188_2.fastq > aln188.sam
+
+bwa mem assembly.fasta READS/SRR492189_1.fastq READS/SRR492189_2.fastq > aln189.sam
+
+bwa mem assembly.fasta READS/SRR492190_1.fastq READS/SRR492190_2.fastq > aln190.sam
+
+bwa mem assembly.fasta READS/SRR492193_1.fastq READS/SRR492193_2.fastq > aln193.sam
+
+bwa mem assembly.fasta READS/SRR492194_1.fastq READS/SRR492194_2.fastq > aln194.sam
+
+bwa mem assembly.fasta READS/SRR492197_1.fastq READS/SRR492197_2.fastq > aln197.sam
+
+samtools sort - o 183.bam aln183.sam
+
+samtools sort - o 186.bam aln186.sam
+
+samtools sort - o 188.bam aln188.sam
+
+samtools sort - o 189.bam aln189.sam
+
+samtools sort - o 190.bam aln190.sam
+
+samtools sort - o 193.bam aln193.sam
+
+samtools sort - o 194.bam aln194.sam
+
+samtools sort - o 197.bam aln197.sam
+
+Question 2: 
+
+The sequence similarity in the contigs
+
+jgi_summarize_bam_contig_depths --outputDepth depth.txt *.bam
+
+metabat2 -i assembly.fasta -a depth.txt -o bins_dir/bin
+
+Question 3:
+
+A. 6 bins
+B. Around 35%
+C. They are same in terms of the order of magnitude you would expect but they are a bit less than what you would expect for a bacterial genome
+D.You would align the bin to the suspected reference genome to determine the percentage of the genome you were able to identify and look for sequence similarity between the bins to check for contamination
+
+head bin.1.fa
+grep NODE_14_length_235766_cov_39.967778 ../assembly.kraken
+NODE_14_length_235766_cov_39.967778     root;cellular organisms;Bacteria;Terrabacteria group;Firmicutes;Bacilli;Bacillales;Staphylococcaceae;Staphylococcus;Staphylococcus haemolyticus;Staphylococcus haemolyticus JCSC1435
+
+head bin.2.fa
+grep NODE_30_length_116726_cov_3.835555 ../assembly.kraken
+NODE_30_length_116726_cov_3.835555      root;cellular organisms;Bacteria;Terrabacteria group;Firmicutes;Bacilli;Lactobacillales;Leuconostocaceae;Leuconostoc;Leuconostoc citreum;Leuconostoc citreum KM20
+
+head bin.3.fa
+grep NODE_24_length_157060_cov_6.639394 ../assembly.kraken
+NODE_24_length_157060_cov_6.639394      root;cellular organisms;Bacteria;Terrabacteria group;Firmicutes;Bacilli;Bacillales;Staphylococcaceae;Staphylococcus;Staphylococcus lugdunensis;Staphylococcus lugdunensis HKU09-01
+
+head bin.4.fa
+grep NODE_1_length_1447137_cov_2268.097092 ../assembly.kraken
+NODE_1_length_1447137_cov_2268.097092   root;cellular organisms;Bacteria;Terrabacteria group;Firmicutes;Bacilli;Lactobacillales;Enterococcaceae;Enterococcus;Enterococcus faecalis;Enterococcus faecalis OG1RF
+
+head bin.5.fa
+grep NODE_4_length_455101_cov_112.371015 ../assembly.kraken
+NODE_4_length_455101_cov_112.371015     root;cellular organisms;Bacteria;Terrabacteria group;Actinobacteria;Actinobacteria;Propionibacteriales;Propionibacteriaceae;Cutibacterium;Cutibacterium avidum;Cutibacterium avidum 44067
+
+head bin.6.fa
+grep NODE_20_length_181746_cov_381.691663 ../assembly.kraken
+NODE_20_length_181746_cov_381.691663    root;cellular organisms;Bacteria;Terrabacteria group;Firmicutes;Bacilli;Bacillales;Staphylococcaceae;Staphylococcus;Staphylococcus epidermidis;Staphylococcus epidermidis RP62A
+
+head bin.7.fa
+grep NODE_12_length_269228_cov_106.168966 ../assembly.kraken
+NODE_12_length_269228_cov_106.168966    root;cellular organisms;Bacteria;Terrabacteria group;Firmicutes;Bacilli;Bacillales;Staphylococcaceae;Staphylococcus;Staphylococcus aureus;Staphylococcus aureus subsp. aureus;Staphylococcus aureus subsp. aureus ST72;Staphylococcus aureus subsp. aureus CN1
+
+head bin.8.fa
+grep NODE_3_length_498518_cov_181.760000 ../assembly.kraken
+NODE_3_length_498518_cov_181.760000     root;cellular organisms;Bacteria;Terrabacteria group;Firmicutes;Tissierellia;Tissierellales;Peptoniphilaceae;Anaerococcus;Anaerococcus prevotii;Anaerococcus prevotii DSM 20548
