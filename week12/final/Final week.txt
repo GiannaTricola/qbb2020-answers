@@ -2,10 +2,9 @@ tar -xvf week13_data.tar
 
 Reformatted using notebook called 'Reformatting'
 
-KtImportText *_form -c -q
+KtImportText -q *_form -o output.html
 
-
-Question 1:
+Question 1: Most of the bacteria seem to be bacilli with the most abundant being enterococcus faecalis. There is also a large portion of actinobacteria. (Note: this only on the three samples because I couldn't open the html file containing all of the samples without my browser crashing)
 
 Step2:
 bwa index assembly.fasta
@@ -92,5 +91,5 @@ NODE_3_length_498518_cov_181.760000     root;cellular organisms;Bacteria;Terraba
 
 Question 4b: You could cluster the sequences based on similarity and presence in the samples and create some sort of threshold for when each cluster can be representative of a taxon
 
-
+Question 5: I would say the data pretty much agree. This is because again we see enterococcus faecalis being the most abundant throughout all samples. The difference between the two representations is that the KRONA plot makes it seem like other genuses are almost as abundant or at least on the same scale of abundance as bacilli, but in the heatmap we can really see the difference in abundance.
  
