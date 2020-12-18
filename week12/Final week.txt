@@ -1,9 +1,11 @@
 tar -xvf week13_data.tar
-KtImportText KRAKEN/SRR4921*.kraken -c -q -o kraken.txt
+
+Reformatted using notebook called 'Reformatting'
+
+KtImportText *_form -c -q
 
 
-cat evol1.kraken | cut -f 2,3 > bac.kraken.krona
-
+Question 1:
 
 Step2:
 bwa index assembly.fasta
@@ -55,6 +57,7 @@ B. Around 35%
 C. They are same in terms of the order of magnitude you would expect but they are a bit less than what you would expect for a bacterial genome
 D.You would align the bin to the suspected reference genome to determine the percentage of the genome you were able to identify and look for sequence similarity between the bins to check for contamination
 
+Question 4a:
 head bin.1.fa
 grep NODE_14_length_235766_cov_39.967778 ../assembly.kraken
 NODE_14_length_235766_cov_39.967778     root;cellular organisms;Bacteria;Terrabacteria group;Firmicutes;Bacilli;Bacillales;Staphylococcaceae;Staphylococcus;Staphylococcus haemolyticus;Staphylococcus haemolyticus JCSC1435
@@ -86,3 +89,8 @@ NODE_12_length_269228_cov_106.168966    root;cellular organisms;Bacteria;Terraba
 head bin.8.fa
 grep NODE_3_length_498518_cov_181.760000 ../assembly.kraken
 NODE_3_length_498518_cov_181.760000     root;cellular organisms;Bacteria;Terrabacteria group;Firmicutes;Tissierellia;Tissierellales;Peptoniphilaceae;Anaerococcus;Anaerococcus prevotii;Anaerococcus prevotii DSM 20548
+
+Question 4b: You could cluster the sequences based on similarity and presence in the samples and create some sort of threshold for when each cluster can be representative of a taxon
+
+
+ 
