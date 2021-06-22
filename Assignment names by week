@@ -1,0 +1,18 @@
+#Bootcamp
+Monday = ['Data Visualization', 'parsing SAM'
+Tuesday = ['ID Mapping', 'PCA']
+Wednesday = ['Genome Arithmitic']
+Thursday = ['Binary search', 'heuristic sequence alignment']
+Friday = ['Linear regression']
+
+Week1 = 'Genome assembly'
+Week2 = 'Variant calling'
+Week3 = 'GWAS'
+Week4 = 'Sequence alignment and evolution'
+Week5 = 'CHIP-seq and motif finding'
+Week6 = 'DNA methylation'
+Week8 = 'Gene expression'
+Week10 = 'scRNA-seq'
+Week11 = '3D genome'
+Week13 = 'Metagenomics'
+
